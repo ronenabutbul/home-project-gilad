@@ -7,30 +7,32 @@ import {
   InputNumber,
   ConfigProvider,
 } from "antd";
-import expensesStore from "../../Store/ExpensesStore";
+import { toJS } from "mobx";
 import dayjs from "dayjs";
 import { observer } from "mobx-react-lite";
 
 const EditExpense = ({ editingExpense }) => {
+  const expenseToEdit = toJS(editingExpense.editingExpense);
+  console.log(expenseToEdit);
   const [form] = Form.useForm();
 
   const handleSubmit = () => {
     const values = form.getFieldsValue();
 
     const formValues = { ...values, date: dayjs(values?.date).toDate() };
-    expensesStore.updateExpense(formValues);
+    editingExpense.updateExpense(formValues);
     form.resetFields();
   };
 
   const handleCancel = () => {
     form.resetFields();
-    expensesStore.handleUpdateExpense();
+    editingExpense.handleUpdateExpense();
   };
 
   return (
     <Modal
       title="Basic Modal"
-      open={expensesStore.isEditModalOpen && !!editingExpense}
+      open={editingExpense.isEditModalOpen && !!editingExpense}
       onOk={handleSubmit}
       okText="Save"
       onCancel={handleCancel}
@@ -40,10 +42,10 @@ const EditExpense = ({ editingExpense }) => {
         labelAlign="left"
         labelWrap
         initialValues={{
-          title: editingExpense?.title,
-          amount: editingExpense?.amount,
-          id: editingExpense?.id,
-          date: dayjs(editingExpense?.date),
+          title: expenseToEdit?.title,
+          amount: expenseToEdit?.amount,
+          id: expenseToEdit?.id,
+          date: dayjs(expenseToEdit?.date),
         }}
         wrapperCol={{ flex: 1 }}
         layout="inline"

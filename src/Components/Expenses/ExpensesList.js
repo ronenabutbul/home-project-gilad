@@ -1,9 +1,9 @@
 import { Space, Table, Button } from "antd";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
-import expensesStore from "../../Store/ExpensesStore";
 import EditExpense from "../EditExpense/EditExpense";
 const ExpensesList = observer(({ items }) => {
+  const expenseItems = toJS(items.filteredExpenses);
   const columns = [
     {
       title: "Title",
@@ -29,7 +29,7 @@ const ExpensesList = observer(({ items }) => {
         <Space size="middle">
           <Button
             onClick={() => {
-              expensesStore.handleUpdateExpense(id);
+              items.handleUpdateExpense(id);
             }}
           >
             Edit Expense
@@ -43,7 +43,7 @@ const ExpensesList = observer(({ items }) => {
       key: "remove",
       render: (id) => (
         <Space size="middle">
-          <Button onClick={() => expensesStore.removeExpense(id)}>
+          <Button onClick={() => items.removeExpense(id)}>
             Remove Expense
           </Button>
         </Space>
@@ -53,14 +53,12 @@ const ExpensesList = observer(({ items }) => {
   return (
     <>
       <Table
-        rowKey={(items) => items.id}
-        dataSource={toJS(items)}
+        rowKey={(expenseItems) => expenseItems.id}
+        dataSource={toJS(expenseItems)}
         columns={columns}
         pagination={false}
       />
-      {expensesStore.isEditModalOpen && (
-        <EditExpense editingExpense={expensesStore.editingExpense} />
-      )}
+      {items.isEditModalOpen && <EditExpense editingExpense={items} />}
     </>
   );
 });

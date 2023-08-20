@@ -1,11 +1,10 @@
 import "./FilterExpensesByYear.css";
 import { Select, Space } from "antd";
 import { observer } from "mobx-react-lite";
-import expensesStore from "../../Store/ExpensesStore";
-const FilterExpensesByYear = observer((props) => {
-  const years = expensesStore.expenses.map((item) =>
-    new Date(item.date).getFullYear()
-  );
+import { toJS } from "mobx";
+const FilterExpensesByYear = observer(({ items }) => {
+  console.log(items);
+  const years = items.expenses.map((item) => new Date(item.date).getFullYear());
   const uniqueYears = Array.from(new Set(years));
   const options = uniqueYears.map((year) => ({
     lable: year.toString(),
@@ -13,7 +12,7 @@ const FilterExpensesByYear = observer((props) => {
   }));
   options.unshift({ lable: "", value: "All" });
   const handleChange = (value) => {
-    props.onSelect(value);
+    toJS(items).onSelect(value);
   };
   return (
     <div className="filter_expenses">
@@ -24,7 +23,7 @@ const FilterExpensesByYear = observer((props) => {
           defaultValue={options[0]}
           style={{ width: 120 }}
           options={options}
-          onChange={expensesStore.handleSelectedYearFilter}
+          onChange={items.handleSelectedYearFilter}
         />
       </Space>
     </div>

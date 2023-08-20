@@ -5,7 +5,7 @@ const App = () => {
   const store = expensesStore;
   return (
     <div className="App">
-      <NewExpense />
+      <NewExpense store={store} />
       <Expenses store={store} />
     </div>
   );

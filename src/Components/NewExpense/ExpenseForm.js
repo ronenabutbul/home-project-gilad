@@ -2,16 +2,14 @@ import React from "react";
 import dayjs from "dayjs";
 import { Button, DatePicker, Form, Input, InputNumber } from "antd";
 import { observer } from "mobx-react-lite";
-import expensesStore from "../../Store/ExpensesStore";
 import "./ExpenseForm.css";
-import FormItem from "antd/es/form/FormItem";
 
-const ExpenseForm = observer(() => {
+const ExpenseForm = observer(({ expense }) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     const formValues = { ...values, date: dayjs(values.date).toDate() };
-    expensesStore.addExpense(formValues);
+    expense.addExpense(formValues);
 
     form.resetFields();
   };
@@ -43,7 +41,7 @@ const ExpenseForm = observer(() => {
         </Button>
       </Form.Item>
       <Form.Item label="Cancel">
-        <Button type="primary" onClick={expensesStore.handleCancelClick}>
+        <Button type="primary" onClick={expense.handleCancelClick}>
           Cancel
         </Button>
       </Form.Item>
