@@ -2,9 +2,9 @@ import React from "react";
 import dayjs from "dayjs";
 import { Button, DatePicker, Form, Input, InputNumber } from "antd";
 import { observer } from "mobx-react-lite";
-import "./ExpenseForm.css";
+import "./NewExpenseForm.css";
 
-const ExpenseForm = observer(({ expense }) => {
+const NewExpenseForm = observer(({ expense }) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -49,4 +49,4 @@ const ExpenseForm = observer(({ expense }) => {
   );
 });
 
-export default ExpenseForm;
+export default NewExpenseForm;

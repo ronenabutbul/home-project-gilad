@@ -1,4 +1,4 @@
-import { Space, Table, Button } from "antd";
+import { Space, Table, Button, Popconfirm } from "antd";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import EditExpense from "../EditExpense/EditExpense";
@@ -42,11 +42,14 @@ const ExpensesList = observer(({ items }) => {
       dataIndex: "id",
       key: "remove",
       render: (id) => (
-        <Space size="middle">
-          <Button onClick={() => items.removeExpense(id)}>
-            Remove Expense
-          </Button>
-        </Space>
+        <Popconfirm
+          title="Sure you want delect?"
+          onConfirm={() => items.removeExpense(id)}
+        >
+          <Space size="middle">
+            <Button>Remove Expense</Button>
+          </Space>
+        </Popconfirm>
       ),
     },
   ];

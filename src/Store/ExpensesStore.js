@@ -11,7 +11,7 @@ configure({
 });
 class ExpensesStore {
   expenses = [];
-  showAddExpenseForm = false;
+  showAddNewExpenseForm = false;
   expenseYear = "All";
   filteredExpenses = [];
   editingExpense = undefined;
@@ -22,7 +22,7 @@ class ExpensesStore {
       expenses: observable,
       filteredExpenses: observable,
       isEditModalOpen: observable,
-      showAddExpenseForm: observable,
+      showAddNewExpenseForm: observable,
       editingExpense: observable,
       addExpense: action,
       updateExpense: action,
@@ -76,10 +76,10 @@ class ExpensesStore {
   };
 
   handleAddExpenseClick = () => {
-    this.showAddExpenseForm = true;
+    this.showAddNewExpenseForm = true;
   };
   handleCancelClick = () => {
-    this.showAddExpenseForm = false;
+    this.showAddNewExpenseForm = false;
   };
 
   prefetchData = () => {

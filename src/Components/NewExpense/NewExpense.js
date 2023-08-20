@@ -1,13 +1,13 @@
-import ExpenseForm from "./ExpenseForm";
+import NewExpenseForm from "./NewExpenseForm";
 import { observer } from "mobx-react-lite";
 const NewExpense = ({ store }) => {
-  const showHideForm = store.showAddExpenseForm;
+  const showHideForm = store.showAddNewExpenseForm;
   return (
     <div className="new-expense">
       {!showHideForm && (
         <button onClick={store.handleAddExpenseClick}>Add New Expense</button>
       )}
-      {showHideForm && <ExpenseForm expense={store} />}
+      {showHideForm && <NewExpenseForm expense={store} />}
     </div>
   );
 };
