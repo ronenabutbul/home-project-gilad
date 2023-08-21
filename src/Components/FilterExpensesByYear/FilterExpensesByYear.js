@@ -5,7 +5,9 @@ import { toJS } from "mobx";
 const FilterExpensesByYear = observer(({ items }) => {
   const years = items.expenses.map((item) => new Date(item.date).getFullYear());
   const uniqueYears = Array.from(new Set(years));
-  const options = uniqueYears.map((year) => ({
+  const sortUniqYears = [...uniqueYears];
+  sortUniqYears.sort((a, b) => a - b);
+  const options = sortUniqYears.map((year) => ({
     lable: year.toString(),
     value: year,
   }));

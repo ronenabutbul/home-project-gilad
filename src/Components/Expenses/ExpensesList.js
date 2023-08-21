@@ -1,9 +1,18 @@
-import { Space, Table, Button, Popconfirm } from "antd";
+import { Space, Table, Button, Popconfirm, App } from "antd";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 import EditExpense from "../EditExpense/EditExpense";
 const ExpensesList = observer(({ items }) => {
   const expenseItems = toJS(items.filteredExpenses);
+  const { message } = App.useApp();
+  const handelRemove = (id) => {
+    items.removeExpense(id);
+
+    if (items.itemDeleted) {
+      message.success("Expense Removed Successfuly");
+    }
+  };
+
   const columns = [
     {
       title: "Title",
@@ -44,7 +53,7 @@ const ExpensesList = observer(({ items }) => {
       render: (id) => (
         <Popconfirm
           title="Sure you want delect?"
-          onConfirm={() => items.removeExpense(id)}
+          onConfirm={() => handelRemove(id)}
         >
           <Space size="middle">
             <Button>Remove Expense</Button>

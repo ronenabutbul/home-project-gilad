@@ -16,7 +16,9 @@ const ChartYears = ({ items }) => {
     acc.push({ year: expenseYear, expense: expenseitem.amount });
     return acc;
   }, []);
-  const data = amountByYear;
+  const sortedByYear = [...amountByYear];
+  sortedByYear.sort((a, b) => a.year - b.year);
+  const data = sortedByYear;
   const config = {
     data,
     height: 200,
