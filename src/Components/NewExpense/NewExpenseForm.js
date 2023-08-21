@@ -1,16 +1,16 @@
 import React from "react";
 import dayjs from "dayjs";
-import { Button, DatePicker, Form, Input, InputNumber } from "antd";
+import { Button, DatePicker, Form, Input, InputNumber, App } from "antd";
 import { observer } from "mobx-react-lite";
 import "./NewExpenseForm.css";
 
 const NewExpenseForm = observer(({ expense }) => {
   const [form] = Form.useForm();
-
-  const onFinish = (values) => {
+  const { message } = App.useApp();
+  const handelSubmit = (values) => {
     const formValues = { ...values, date: dayjs(values.date).toDate() };
     expense.addExpense(formValues);
-
+    message.success("Expense Added");
     form.resetFields();
   };
 
@@ -23,7 +23,7 @@ const NewExpenseForm = observer(({ expense }) => {
       layout="inline"
       form={form}
       name="control-hooks"
-      onFinish={onFinish}
+      onFinish={handelSubmit}
     >
       <Form.Item name="title" label="Title">
         <Input placeholder="Enter Title" />

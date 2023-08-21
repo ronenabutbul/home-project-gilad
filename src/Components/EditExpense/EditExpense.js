@@ -13,7 +13,7 @@ import { observer } from "mobx-react-lite";
 
 const EditExpense = ({ editingExpense }) => {
   const expenseToEdit = toJS(editingExpense.editingExpense);
-  console.log(expenseToEdit);
+
   const [form] = Form.useForm();
 
   const handleSubmit = () => {

@@ -1,40 +1,38 @@
 import { toJS } from "mobx";
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { Line } from "@ant-design/charts";
+import { Column } from "@ant-design/charts";
 const Carts = ({ items }) => {
   const expenseItems = toJS(items.filteredExpenses);
-  //const expenseMonth = expenseItems.date.getMonth();
-  // console.log(expenseItems.date);
   const data = [
-    { month: "Jan", value: 0 },
-    { month: "Feb", value: 0 },
-    { month: "Mar", value: 0 },
-    { month: "Apr", value: 0 },
-    { month: "May", value: 0 },
-    { month: "Jun", value: 0 },
-    { month: "Jul", value: 0 },
-    { month: "AUG", value: 0 },
-    { month: "Sep", value: 0 },
-    { month: "Oct", value: 0 },
-    { month: "Nov", value: 0 },
-    { month: "Dec", value: 0 },
+    { month: "Jan", expense: 0 },
+    { month: "Feb", expense: 0 },
+    { month: "Mar", expense: 0 },
+    { month: "Apr", expense: 0 },
+    { month: "May", expense: 0 },
+    { month: "Jun", expense: 0 },
+    { month: "Jul", expense: 0 },
+    { month: "Aug", expense: 0 },
+    { month: "Sep", expense: 0 },
+    { month: "Oct", expense: 0 },
+    { month: "Nov", expense: 0 },
+    { month: "Dec", expense: 0 },
   ];
   for (const expense of expenseItems) {
     const expenseMonth = expense.date.getMonth();
-    data[expenseMonth].value += expense.amount;
-    console.log(expenseMonth);
+    data[expenseMonth].expense += expense.amount;
   }
+  console.log(data);
   const config = {
     data,
     height: 200,
     xField: "month",
-    yField: "value",
+    yField: "expense",
     point: {
       size: 5,
       shape: "diamond",
     },
   };
-  return <Line {...config} />;
+  return <Column {...config} />;
 };
 export default observer(Carts);

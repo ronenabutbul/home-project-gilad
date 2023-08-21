@@ -13,6 +13,7 @@ class ExpensesStore {
   expenses = [];
   showAddNewExpenseForm = false;
   expenseYear = "All";
+  showChart = false;
   filteredExpenses = [];
   editingExpense = undefined;
   isEditModalOpen = false;
@@ -24,6 +25,7 @@ class ExpensesStore {
       isEditModalOpen: observable,
       showAddNewExpenseForm: observable,
       editingExpense: observable,
+      showChart: observable,
       addExpense: action,
       updateExpense: action,
       removeExpense: action,
@@ -70,7 +72,11 @@ class ExpensesStore {
   handleSelectedYearFilter = (year) => {
     this.expenseYear = year;
     this.filteredExpenses = this.expenses.filter((expense) => {
-      if (this.expenseYear === "All") return true;
+      if (this.expenseYear === "All") {
+        this.showChart = false;
+        return true;
+      }
+      this.showChart = true;
       return expense.date.getFullYear() === this.expenseYear;
     });
   };

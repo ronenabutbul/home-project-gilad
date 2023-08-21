@@ -3,7 +3,6 @@ import { Select, Space } from "antd";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
 const FilterExpensesByYear = observer(({ items }) => {
-  console.log(items);
   const years = items.expenses.map((item) => new Date(item.date).getFullYear());
   const uniqueYears = Array.from(new Set(years));
   const options = uniqueYears.map((year) => ({
