@@ -6,14 +6,14 @@ import {
   Input,
   InputNumber,
   ConfigProvider,
+  App,
 } from "antd";
 import { toJS } from "mobx";
 import dayjs from "dayjs";
 import { observer } from "mobx-react-lite";
-
 const EditExpense = ({ editingExpense }) => {
   const expenseToEdit = toJS(editingExpense.editingExpense);
-
+  const { message } = App.useApp();
   const [form] = Form.useForm();
 
   const handleSubmit = () => {
@@ -22,6 +22,7 @@ const EditExpense = ({ editingExpense }) => {
     const formValues = { ...values, date: dayjs(values?.date).toDate() };
     editingExpense.updateExpense(formValues);
     form.resetFields();
+    message.success("Expense edit saved Successfuly");
   };
 
   const handleCancel = () => {
@@ -31,7 +32,7 @@ const EditExpense = ({ editingExpense }) => {
 
   return (
     <Modal
-      title="Basic Modal"
+      title="Edit expense"
       open={editingExpense.isEditModalOpen && !!editingExpense}
       onOk={handleSubmit}
       okText="Save"

@@ -1,7 +1,7 @@
 import { toJS } from "mobx";
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { Column } from "@ant-design/charts";
+import { Line } from "@ant-design/charts";
 const Carts = ({ items }) => {
   const expenseItems = toJS(items.filteredExpenses);
   const data = [
@@ -33,6 +33,6 @@ const Carts = ({ items }) => {
       shape: "diamond",
     },
   };
-  return <Column {...config} />;
+  return <Line {...config} />;
 };
 export default observer(Carts);

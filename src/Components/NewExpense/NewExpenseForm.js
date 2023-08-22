@@ -25,25 +25,37 @@ const NewExpenseForm = observer(({ expense }) => {
       name="control-hooks"
       onFinish={handelSubmit}
     >
-      <Form.Item name="title" label="Title">
+      <Form.Item
+        name="title"
+        label="Title"
+        rules={[{ required: true, message: "Please input expense title" }]}
+      >
         <Input placeholder="Enter Title" />
       </Form.Item>
-      <Form.Item name="amount" label="Amount">
+      <Form.Item
+        name="amount"
+        label="Amount"
+        rules={[{ required: true, message: "Please input expense amount" }]}
+      >
         <InputNumber type="number" min={0} placeholder="99.9" />
       </Form.Item>
 
-      <Form.Item name="date" label="Date">
+      <Form.Item
+        name="date"
+        label="Date"
+        rules={[{ required: true, message: "Please select expense date" }]}
+      >
         <DatePicker />
       </Form.Item>
       <Form.Item label="Submit">
-        <Button type="primary" htmlType="submit">
+        <button type="primary" htmlType="submit">
           Add Expense
-        </Button>
+        </button>
       </Form.Item>
       <Form.Item label="Cancel">
-        <Button type="primary" onClick={expense.handleCancelClick}>
+        <button type="primary" onClick={expense.handleCancelClick}>
           Cancel
-        </Button>
+        </button>
       </Form.Item>
     </Form>
   );

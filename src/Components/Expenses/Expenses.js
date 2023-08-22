@@ -7,7 +7,6 @@ import { observer } from "mobx-react-lite";
 import ChartYears from "./Charts/ChartYears";
 const { Content } = Layout;
 const Expenses = observer(({ store }) => {
-  const expenseYear = store.expenseYear === "All";
   return (
     <div>
       <Layout className="expenses">
